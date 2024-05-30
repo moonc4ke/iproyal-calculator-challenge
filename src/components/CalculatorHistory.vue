@@ -2,6 +2,7 @@
 import { ref, inject, type Ref } from 'vue';
 import { type HistoryItem } from '@/types/types';
 import CalculatorOperation from './CalculatorOperation.vue';
+import CalculatorButton from './CalculatorButton.vue';
 
 const history = inject<Ref<HistoryItem[]>>('history', ref([]));
 const result = inject<Ref<number | null>>('result', ref(null));
@@ -36,19 +37,57 @@ const handleImportHistory = (event: Event) => {
 <template>
   <div>
     <CalculatorOperation />
-    <ul>
-      <li
-        v-for="(entry, index) in history"
-        :key="index"
-        @click="handleSetOperation(entry)"
-        @keydown.enter="handleSetOperation(entry)"
-      >
-        {{ entry.expression }} = {{ entry.result }}
-      </li>
-    </ul>
-    <input id="import" type="file" @change="handleImportHistory" hidden ref="fileInput" />
-    <button @click="triggerFileInput" type="button">Import</button>
-    <button @click="exportHistory" type="button">Export</button>
-    <button @click="clearHistory" type="button">Clear</button>
+
+    <section class="calculator-history-section">
+      <h2>History:</h2>
+      <ul v-if="history.length > 0" class="calculator-history-section-list">
+        <li
+          v-for="(entry, index) in history"
+          :key="index"
+          @click="handleSetOperation(entry)"
+          @keydown.enter="handleSetOperation(entry)"
+        >
+          {{ entry.expression }} = {{ entry.result }}
+        </li>
+      </ul>
+
+      <input id="import" type="file" @change="handleImportHistory" hidden ref="fileInput" />
+      <div class="calculator-history-section-actions">
+        <CalculatorButton title="Import" @click="triggerFileInput" />
+        <CalculatorButton title="Export" @click="exportHistory" />
+        <CalculatorButton title="Clear" @click="clearHistory" />
+      </div>
+    </section>
   </div>
 </template>
+
+<style scoped>
+.calculator-history-section h2 {
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.calculator-history-section-list {
+  margin-top: 8px;
+  background-color: #5A5757;
+  border-radius: 10px;
+  box-shadow: 5px 5px 40px 0px #0B0B0B4D;
+  padding: 10px;
+}
+
+.calculator-history-section-list li {
+  list-style: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.calculator-history-section-list li:hover {
+  text-decoration: underline;
+}
+
+.calculator-history-section-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+</style>

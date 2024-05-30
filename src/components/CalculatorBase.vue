@@ -10,7 +10,7 @@ const result = ref<number | null>(null);
 const history = ref<HistoryItem[]>([]);
 const errorMessage = ref<string>('');
 
-const operations: { [key: string]: (a: number, b: number) => number } = {
+const operations: Record<string, (a: number, b: number) => number> = {
   '+': (a, b) => a + b,
   '-': (a, b) => a - b,
   '*': (a, b) => a * b,
@@ -62,27 +62,8 @@ const importHistory = (event: Event): void => {
     reader.onload = (e) => {
       if (e.target && typeof e.target.result === 'string') {
         try {
-          const importedData = JSON.parse(e.target.result);
-          const validEntries: HistoryItem[] = [];
-
-          importedData.forEach((entry: any, index: number) => {
-            try {
-              if (
-                entry
-                && typeof entry.expression === 'string'
-                && typeof entry.result === 'number'
-              ) {
-                validEntries.push(entry);
-              } else {
-                // eslint-disable-next-line no-console
-                console.warn(`Skipping invalid entry at index ${index}: Invalid types`);
-              }
-            } catch (error) {
-              // eslint-disable-next-line no-console
-              console.warn(`Skipping invalid entry at index ${index}:`, error);
-            }
-          });
-
+          const importedData = JSON.parse(e.target.result) as HistoryItem[];
+          const validEntries: HistoryItem[] = importedData.filter((entry) => typeof entry.expression === 'string' && typeof entry.result === 'number');
           history.value = [...history.value, ...validEntries];
         } catch (error) {
           // eslint-disable-next-line no-console

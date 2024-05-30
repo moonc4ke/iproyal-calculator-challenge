@@ -3,19 +3,13 @@ import { ref, inject, type Ref } from 'vue';
 
 const setInputs = inject<(n1: number, n2: number, op: string) => void>('setInputs');
 
-const num1 = inject<Ref<string>>('num1', ref('0'));
-const num2 = inject<Ref<string>>('num2', ref('0'));
+const num1 = inject<Ref<number>>('num1', ref(0));
+const num2 = inject<Ref<number>>('num2', ref(0));
 const operation = inject<Ref<string>>('operation', ref('+'));
 
 const updateValues = () => {
-  const num1Value = parseFloat(num1.value);
-  const num2Value = parseFloat(num2.value);
-
-  if (!Number.isNaN(num1Value) && !Number.isNaN(num2Value)) {
-    setInputs?.(num1Value, num2Value, operation.value);
-  }
+  setInputs?.(num1.value, num2.value, operation.value);
 };
-
 </script>
 
 <template>

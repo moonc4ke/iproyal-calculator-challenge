@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, inject, type Ref } from 'vue';
 import { type HistoryItem } from '@/types/types';
-// import CalculatorOperation from './CalculatorOperation.vue';
+import CalculatorOperation from './CalculatorOperation.vue';
 
 const history = inject<Ref<HistoryItem[]>>('history', ref([]));
 const result = inject<Ref<number | null>>('result', ref(null));
@@ -28,7 +28,7 @@ const handleSetOperation = (entry: HistoryItem) => {
 
 <template>
   <div>
-    <!-- <CalculatorOperation /> -->
+    <CalculatorOperation />
     <ul>
       <li
         v-for="(entry, index) in history"

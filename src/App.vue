@@ -7,3 +7,10 @@ import CalculatorBase from './components/CalculatorBase.vue';
     <CalculatorBase />
   </main>
 </template>
+
+<style scoped>
+main {
+  margin: 0 auto;
+  max-width: 800px;
+}
+</style>

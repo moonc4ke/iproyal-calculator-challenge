@@ -116,7 +116,28 @@ provide('clearHistory', clearHistory);
 </script>
 
 <template>
-  <div>
+  <div class="calculator-base">
+    <h1>Calculator</h1>
     <CalculatorResult />
   </div>
 </template>
+
+<style scoped>
+.calculator-base {
+  font-family: 'Quicksand', sans-serif;
+  box-sizing: border-box;
+  max-width: 450px;
+  margin: 0 auto;
+  color: #FFFFFF;
+  background-color: #414141;
+  border-radius: 40px;
+  padding: 65px 35px;
+}
+
+.calculator-base h1 {
+  margin-top: 0;
+  margin-bottom: 40px;
+  font-weight: 400;
+  text-align: center;
+}
+</style>

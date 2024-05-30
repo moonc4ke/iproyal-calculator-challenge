@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import CalculatorBase from './components/CalculatorBase.vue';
 </script>
 
 <template>
   <main>
-    <h1>Base Component</h1>
+    <CalculatorBase />
   </main>
 </template>

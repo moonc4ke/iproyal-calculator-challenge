@@ -19,19 +19,58 @@ const updateValues = () => {
 </script>
 
 <template>
-  <div>
-    <label for="num1">Number 1:</label>
-    <input id="num1" v-model="num1" type="number" placeholder="Number 1" @change="updateValues">
+  <div class="calculator-operation-section">
+    <div class="calculator-operation-section-block">
+      <label for="num1">Number 1:</label>
+      <input id="num1" v-model="num1" type="number" placeholder="Number 1" @change="updateValues">
+    </div>
 
-    <label for="num2">Number 2:</label>
-    <input id="num2" v-model="num2" type="number" placeholder="Number 2" @change="updateValues">
+    <div class="calculator-operation-section-block">
+      <label for="operation">Operation:</label>
+      <select id="operation" v-model="operation" @change="updateValues">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+    </div>
 
-    <label for="operation">Operation:</label>
-    <select id="operation" v-model="operation" @change="updateValues">
-      <option value="+">+</option>
-      <option value="-">-</option>
-      <option value="*">*</option>
-      <option value="/">/</option>
-    </select>
+    <div class="calculator-operation-section-block">
+      <label for="num2">Number 2:</label>
+      <input id="num2" v-model="num2" type="number" placeholder="Number 2" @change="updateValues">
+    </div>
   </div>
 </template>
+
+<style scoped>
+input { outline: none; }
+
+.calculator-operation-section label {
+  font-weight: 400;
+  margin-right: 5px;
+}
+
+.calculator-operation-section input, select {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 8px;
+  margin: 0;
+  background-color: #5A5757;
+  color: #fff;
+  box-shadow: 5px 5px 40px 0px #0B0B0B4D;
+  border-radius: 10px;
+}
+
+.calculator-operation-section input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 50%;
+  height: 20px;
+}
+
+.calculator-operation-section-block {
+  margin-bottom: 10px;
+}
+</style>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, provide } from 'vue';
 import { type HistoryItem } from '@/types/types';
-// import CalculatorResult from './CalculatorResult.vue';
+import CalculatorResult from './CalculatorResult.vue';
 
 const num1 = ref<number>(0);
 const num2 = ref<number>(0);
@@ -116,6 +116,6 @@ provide('clearHistory', clearHistory);
 
 <template>
   <div>
-    <!-- <CalculatorResult /> -->
+    <CalculatorResult />
   </div>
 </template>

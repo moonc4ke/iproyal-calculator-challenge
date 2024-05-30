@@ -29,8 +29,9 @@ const calculate = () => {
   if (operationFunc) {
     const calcResult = operationFunc(num1.value, num2.value);
     if (!Number.isNaN(calcResult)) {
-      result.value = calcResult;
-      history.value.push({ expression: `${num1.value} ${operation.value} ${num2.value}`, result: calcResult });
+      const roundedResult = parseFloat(calcResult.toFixed(4));
+      result.value = roundedResult;
+      history.value.push({ expression: `${num1.value} ${operation.value} ${num2.value}`, result: roundedResult });
     } else {
       errorMessage.value = 'Invalid calculation';
     }

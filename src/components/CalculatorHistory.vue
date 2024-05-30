@@ -24,6 +24,13 @@ const handleSetOperation = (entry: HistoryItem) => {
   result.value = entry.result;
   setInputs?.(n1, n2, op);
 };
+
+const handleImportHistory = (event: Event) => {
+  importHistory?.(event);
+  if (fileInput.value) {
+    fileInput.value.value = '';
+  }
+};
 </script>
 
 <template>
@@ -39,7 +46,7 @@ const handleSetOperation = (entry: HistoryItem) => {
         {{ entry.expression }} = {{ entry.result }}
       </li>
     </ul>
-    <input id="import" type="file" @change="importHistory" hidden ref="fileInput" />
+    <input id="import" type="file" @change="handleImportHistory" hidden ref="fileInput" />
     <button @click="triggerFileInput" type="button">Import</button>
     <button @click="exportHistory" type="button">Export</button>
     <button @click="clearHistory" type="button">Clear</button>
